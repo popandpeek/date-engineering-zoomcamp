@@ -4,6 +4,8 @@ RUN apt-get install wget
 RUN pip install pandas sqlalchemy psycopg2
 
 WORKDIR /app
-COPY ingest_data.py ingest_data.py 
+COPY upload-data.py upload-data.py
+COPY green_tripdata_2019-01.csv green_tripdata_2019-01.csv
+COPY taxi+_zone_lookup.csv taxi+_zone_lookup.csv
 
-ENTRYPOINT [ "python", "ingest_data.py" ]
+ENTRYPOINT [ "python", "upload-data.py" ]
