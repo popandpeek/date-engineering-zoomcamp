@@ -11,7 +11,7 @@ from datetime import timedelta
 from prefect_sqlalchemy import SqlAlchemyConnector
 
 
-@task(log_prints=True, tags=["extract"], cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
+@task(log_prints=True, tags=["extract"])
 def extract_data(url: str):
     # the backup files are gzipped, and it's important to keep the correct extension
     # for pandas to be able to open the file
