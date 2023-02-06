@@ -2,6 +2,7 @@ from pathlib import Path
 import pandas as pd
 from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
+from prefect.filesystems import GCS
 from random import randint
 
 
@@ -37,17 +38,17 @@ def write_local(df: pd.DataFrame, color: str, dataset_file: str) -> Path:
 @task()
 def write_gcs(path: Path) -> None:
     """Upload local parquet file to GCS"""
-    gcs_block = GcsBucket.load("prefect-zoomcamp-block")
-    gcs_block.upload_from_path(from_path=path, to_path=path)
+    gcs_block = GCS.load("prefect-zoomcamp-block")
+    gcs_block.put_directory(local_path=path)
     return
 
 
-@flow()
+@flow(log_prints=True)
 def etl_web_to_gcs() -> None:
     """The main ETL function"""
     color = "green"
-    year = 2020
-    month = 11
+    year = 2019
+    month = 4
     dataset_file = f"{color}_tripdata_{year}-{month:02}"
     dataset_url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{color}/{dataset_file}.csv.gz"
 
