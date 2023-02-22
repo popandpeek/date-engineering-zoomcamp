@@ -23,4 +23,3 @@ models:
             - not_null:
                 severity: error
       
-      

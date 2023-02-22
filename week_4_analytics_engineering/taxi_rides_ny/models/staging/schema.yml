@@ -1,22 +1,14 @@
-
 version: 2
 
 sources:
-    - name: staging
-      #For bigquery:
-      #database: taxi-rides-ny-339813
-
-      # For postgres:
-      database: production
-
-      schema: trips_data_all
-
-      # loaded_at_field: record_loaded_at
-      tables:
-        - name: green_tripdata
-        - name: yellow_tripdata
-         # freshness:
-           # error_after: {count: 6, period: hour}
+  - name: staging
+    database: t-diagram-374918
+    schema: zoomcamp_dbt
+    
+    tables:
+      - name: green 
+      - name: yellow
+      - name: fhv
 
 models:
     - name: stg_green_tripdata
@@ -201,3 +193,21 @@ models:
             description: Total amount of all tolls paid in trip.
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
+
+    - name: stg_fhv_tripdata
+      description: NA
+      columns:
+          - name: dispatching_base_num
+            description: NA
+          - name: pickup_datetime
+            description: NA
+          - name: dropoff_datetime
+            description: NA
+          - name: PUlocationID
+            description: NA
+          - name: DOlocationID
+            description: NA
+          - name: SR_Flag
+            description: NA
+          - name: Affiliated_base_number
+            description: NA
